@@ -1,35 +1,35 @@
 #include "Cell.h"
 
 Cell::Cell(){
-  value = '\0';
-  occupied = false;
-  numberOfNeighbors = 0;
+  m_value = '\0';
+  m_occupied = false;
+  m_numberOfNeighbors = 0;
 }
 Cell::Cell(bool occupied, int numberOfNeighbors){
-  occupied = occupied;
-  numberOfNeighbors = numberOfNeighbors;
+  m_occupied = occupied;
+  m_numberOfNeighbors = numberOfNeighbors;
   if(occupied){
-    value = 'X';
+    m_value = 'X';
   }
   else {
-    value = '\0';
+    m_value = '\0';
   }
 }
 char Cell::getValue(){
-  return value;
+  return m_value;
 }
 bool Cell::getOccupied(){
-  return occupied;
+  return m_occupied;
 }
 int Cell::getNumberOfNeighbors(){
-  return numberOfNeighbors;
+  return m_numberOfNeighbors;
 }
 void Cell::setValue(char value){
-  value = value;
+  m_value = value;
 }
 void Cell::setOccupied(bool occupied){
-  occupied = occupied;
+  m_occupied = occupied;
 }
 void Cell::setNumberOfNeighbors(int numberOfNeighbors){
-  numberOfNeighbors = numberOfNeighbors;
+  m_numberOfNeighbors = numberOfNeighbors;
 }

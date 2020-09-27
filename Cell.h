@@ -3,9 +3,9 @@ using namespace std;
 
 class Cell{
   private:
-    char value;
-    bool occupied;
-    int numberOfNeighbors;
+    char m_value;
+    bool m_occupied;
+    int m_numberOfNeighbors;
   public:
     // default Constructor
     Cell();
@@ -17,5 +17,5 @@ class Cell{
     // mutators
     void setOccupied(bool occupied);
     void setNumberOfNeighbors(int numberOfNeighbors);
-    void setValue(char value);
+    void setValue(char val);
 };
