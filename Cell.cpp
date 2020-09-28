@@ -26,6 +26,9 @@ int Cell::getNumberOfNeighbors(){
 }
 void Cell::setValue(char value){
   m_value = value;
+  if(value != '\0'){
+    m_occupied = true;
+  }
 }
 void Cell::setOccupied(bool occupied){
   m_occupied = occupied;
