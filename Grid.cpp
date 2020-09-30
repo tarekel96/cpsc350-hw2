@@ -17,6 +17,23 @@ Grid::Grid(){
     }
   }
 }
+// Copy constructor
+Grid::Grid(const Grid &currentGrid){
+  m_width = currentGrid.m_width;
+  m_height = currentGrid.m_height;
+  m_mode = currentGrid.m_mode;
+  // dynamic allocation
+  array = new Cell*[m_width];
+  for(int i = 0; i < m_width; ++i){
+    array[i] = new Cell[m_height];
+  }
+  // fill - copy values from currentGrid
+  for(int i = 0; i < m_width; ++i){
+    for(int j = 0; j < m_height; ++j){
+      array[i][j] = currentGrid.array[i][j];
+    }
+  }
+}
 Grid::Grid(string file, int mode){
   ifstream inFile;
   int rows;
@@ -82,7 +99,7 @@ Grid::Grid(int width, int height, int mode){
 Grid::Grid(int width, int height, float populationDensity, int mode){
   m_mode = mode;
   m_generation = 0;
-  float r;
+  float r; // random variable
   m_width = width;
   m_height = height;
   // dynamic allocation
@@ -145,6 +162,180 @@ void Grid::setElement(int row, int col, char value){
 }
 char Grid::getElement(int row, int col){
   return array[row][col].getValue();
+}
+int Grid::calculateNumberOfNeighbors(int row, int col, Grid const &currentGrid){
+  int count = 0;
+  //cout << "Occupied : " << currentGrid.array[row][col].getOccupied() << endl;
+  // top left case
+  if(row == 0 && col == 0){
+    if(currentGrid.array[row][col + 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col + 1].getOccupied()){
+      count++;
+    }
+  }
+  // top right case
+  else if(row == 0 && col == currentGrid.m_height - 1){
+    if(currentGrid.array[row][col - 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col - 1].getOccupied()){
+      count++;
+    }
+  }
+  // bottom left case
+  else if(row == currentGrid.m_width - 1 && col == 0){
+    if(currentGrid.array[row][col + 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row - 1][col].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row - 1][col + 1].getOccupied()){
+      count++;
+    }
+  }
+  // bottom right case
+  else if(row == currentGrid.m_width - 1 && col == currentGrid.m_height - 1){
+    if(currentGrid.array[row - 1][col].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row][col - 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row - 1][col - 1].getOccupied()){
+      count++;
+    }
+  }
+  // first row - middle
+  else if(row == 0 && col != 0 && col != currentGrid.m_height - 1){
+    if(currentGrid.array[row][col + 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row][col - 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col + 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col - 1].getOccupied()){
+      count++;
+    }
+  }
+  // last row - middle
+  else if(row == currentGrid.m_width - 1 && col != 0 && col != currentGrid.m_height - 1){
+    if(currentGrid.array[row][col + 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row][col - 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row - 1][col].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row - 1][col + 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row - 1][col - 1].getOccupied()){
+      count++;
+    }
+  }
+  // first col - middle
+  else if(col == 0 && row != 0 && row != currentGrid.m_width - 1){
+    if(currentGrid.array[row][col + 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row - 1][col].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col + 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row - 1][col + 1].getOccupied()){
+      count++;
+    }
+  }
+  // last col - middle
+  else if(col == currentGrid.m_height - 1 && row != 0 && row != currentGrid.m_width - 1){
+    if(currentGrid.array[row][col - 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row - 1][col].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col - 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row - 1][col - 1].getOccupied()){
+      count++;
+    }
+  }
+  // middle
+  else {
+    if(currentGrid.array[row][col + 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row][col - 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row - 1][col].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row - 1][col + 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row - 1][col - 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col + 1].getOccupied()){
+      count++;
+    }
+    if(currentGrid.array[row + 1][col - 1].getOccupied()){
+      count++;
+    }
+  }
+  return count;
+}
+void Grid::next(Grid const& currentGrid){
+  Grid* newGrid = new Grid(currentGrid);
+  for(int i = 0; i < currentGrid.m_width; ++i){
+    for(int j = 0; j < currentGrid.m_height; ++j){
+      Cell currentCell = currentGrid.array[i][j];
+      //cout << "Cell at " << "[" << i << "]" << "[" << j << "]" << " count: " << calculateNumberOfNeighbors(i,j, currentGrid) << endl;
+      int numberOfNeighbors = calculateNumberOfNeighbors(i, j, currentGrid);
+      if(numberOfNeighbors <= 1){
+        newGrid->setElement(i, j, '-');
+      }
+      else if(numberOfNeighbors == 2){
+        newGrid->setElement(i,j,currentGrid.array[i][j].getValue());
+      }
+      else if(numberOfNeighbors == 3){
+        newGrid->setElement(i,j,'X');
+      }
+      else {
+        newGrid->setElement(i, j, '-');
+      }
+    }
+  }
 }
 void Grid::simulate(){
   bool occupied;

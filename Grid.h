@@ -17,6 +17,7 @@ class Grid{
     Grid(string file, int mode);
     Grid(int width, int height, int mode);
     Grid(int width, int height, float populationDensity, int mode);
+    Grid(const Grid &currentGrid);
     ~Grid();
     string printGrid();
     void incrementGeneration();
@@ -30,6 +31,7 @@ class Grid{
     void setElement(int row, int col, char value);
     void setMode(int mode);
     // helper functions
-    int calculateNumberOfNeighbors(int row, int col);
+    void next(Grid const& currentGrid);
+    int calculateNumberOfNeighbors(int row, int col, Grid const &currentGrid);
     void simulate();
 };

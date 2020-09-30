@@ -25,10 +25,10 @@ int Cell::getNumberOfNeighbors(){
   return m_numberOfNeighbors;
 }
 void Cell::setValue(char value){
-  m_value = value;
-  if(value != '\0'){
+  if(value != '\0' && value != '-'){
     m_occupied = true;
   }
+  m_value = value;
 }
 void Cell::setOccupied(bool occupied){
   m_occupied = occupied;
