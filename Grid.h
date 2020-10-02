@@ -1,37 +1,39 @@
+#ifndef GRID_H
+#define GRID_H
 #include <iostream>
 #include <fstream>
 #include "Cell.h"
+#include <unistd.h>
 using namespace std;
 
 class Grid{
   private:
     int m_width;
     int m_height;
-    Cell **array;
     Cell **prevArray;
     Cell **nextArray;
     int m_generation;
     int m_mode;
   public:
     Grid();
-    Grid(string file, int mode);
-    Grid(int width, int height, int mode);
-    Grid(int width, int height, float populationDensity, int mode);
+    Grid(string file);
+    Grid(int width, int height);
+    Grid(int width, int height, float populationDensity);
     Grid(const Grid &currentGrid);
     ~Grid();
-    string printGrid();
+    Cell **array;
+    virtual string printGrid();
     void incrementGeneration();
     // accessors
     int getRows();
     int getColumns();
     char getElement(int row, int col);
-    int getMode();
     int getGenerationNumber();
     // mutators
     void setElement(int row, int col, char value);
-    void setMode(int mode);
+    void setGeneration(int generation);
     // helper functions
     void next(Grid const& currentGrid);
     int calculateNumberOfNeighbors(int row, int col, Grid const &currentGrid);
-    void simulate();
 };
+#endif // GRID_H

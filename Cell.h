@@ -1,3 +1,5 @@
+#ifndef CELL_H
+#define CELL_H
 #include <iostream>
 using namespace std;
 
@@ -19,3 +21,4 @@ class Cell{
     void setNumberOfNeighbors(int numberOfNeighbors);
     void setValue(char val);
 };
+#endif

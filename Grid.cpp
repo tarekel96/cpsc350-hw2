@@ -22,6 +22,10 @@ Grid::Grid(const Grid &currentGrid){
   m_width = currentGrid.m_width;
   m_height = currentGrid.m_height;
   m_mode = currentGrid.m_mode;
+  m_generation = currentGrid.m_generation;
+  // cout << "generation " << m_generation << endl;
+  // incrementGeneration();
+  // cout << "generation " << m_generation << endl;
   // dynamic allocation
   array = new Cell*[m_width];
   for(int i = 0; i < m_width; ++i){
@@ -34,7 +38,8 @@ Grid::Grid(const Grid &currentGrid){
     }
   }
 }
-Grid::Grid(string file, int mode){
+Grid::Grid(string file){
+  m_generation = 0;
   ifstream inFile;
   int rows;
   int columns;
@@ -79,11 +84,10 @@ Grid::Grid(string file, int mode){
     }
   }
 }
-Grid::Grid(int width, int height, int mode){
+Grid::Grid(int width, int height){
   m_generation = 0;
   m_width = width;
   m_height = height;
-  m_mode = mode;
   // dynamic allocation
   array = new Cell*[m_width];
   for(int i = 0; i < m_width; ++i){
@@ -96,8 +100,7 @@ Grid::Grid(int width, int height, int mode){
     }
   }
 }
-Grid::Grid(int width, int height, float populationDensity, int mode){
-  m_mode = mode;
+Grid::Grid(int width, int height, float populationDensity){
   m_generation = 0;
   float r; // random variable
   m_width = width;
@@ -118,12 +121,12 @@ Grid::Grid(int width, int height, float populationDensity, int mode){
         array[i][j].setValue('-');
       }
     }
-    cout << endl;
   }
 }
 string Grid::printGrid(){
   string grid = "";
   // print
+  grid += "CLASSICAL MODE\n";
   grid += "GENERATION: ";
   grid += getGenerationNumber();
   grid += "\n";
@@ -151,11 +154,8 @@ int Grid::getColumns(){
 int Grid::getGenerationNumber(){
   return m_generation;
 }
-int Grid::getMode(){
-  return m_mode;
-}
-void Grid::setMode(int mode){
-  m_mode = mode;
+void Grid::setGeneration(int generation){
+  m_generation = generation;
 }
 void Grid::setElement(int row, int col, char value){
   array[row][col].setValue(value);
@@ -336,44 +336,6 @@ void Grid::next(Grid const& currentGrid){
       }
     }
   }
-}
-void Grid::simulate(){
-  bool occupied;
-  for(int i = 0; i < m_width; ++i){
-    for(int j = 0; j < m_height; ++j){
-      occupied = array[i][j].getOccupied();
-      if(occupied){
-        int numberOfNeighbors;
-        if(i == 0 && j == 0){
-          if(array[i + 1][j].getOccupied()) numberOfNeighbors++;
-          if(array[i][j+1].getOccupied()) numberOfNeighbors++;
-          if(array[i+1][j+1].getOccupied()) numberOfNeighbors++;
-        }
-        else if(i == 0 && j == m_height - 1){
-          if(array[i - 1][j].getOccupied()) numberOfNeighbors++;
-          if(array[i][j + 1].getOccupied()) numberOfNeighbors++;
-          if(array[i -1][j + 1].getOccupied()) numberOfNeighbors++;
-        }
-        else if(i == m_width - 1 && j == 0){
-          if(array[i + 1][j].getOccupied()) numberOfNeighbors++;
-          if(array[i][j-1].getOccupied()) numberOfNeighbors++;
-          if(array[i+1][j-1].getOccupied()) numberOfNeighbors++;
-        }
-        else if(i == m_width - 1 && j == m_height - 1){
-          if(array[i - 1][j].getOccupied()) numberOfNeighbors++;
-          if(array[i][j - 1].getOccupied()) numberOfNeighbors++;
-          if(array[i -1][j - 1].getOccupied()) numberOfNeighbors++;
-        }
-        else {
-          if(array[i - 1][j].getOccupied()) numberOfNeighbors++;
-          if(array[i + 1][j].getOccupied()) numberOfNeighbors++;
-          if(array[i][j - 1].getOccupied()) numberOfNeighbors++;
-          if(array[i + 1][j + 1].getOccupied()) numberOfNeighbors++;
-          if(array[i + 1][j - 1].getOccupied()) numberOfNeighbors++;
-          if(array[i - 1][j + 1].getOccupied()) numberOfNeighbors++;
-          if(array[i - 1][j - 1].getOccupied()) numberOfNeighbors++;
-        }
-      }
-    }
-  }
+  newGrid->setGeneration(currentGrid.m_generation + 1);
+  cout << newGrid->printGrid() << endl;
 }
