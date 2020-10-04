@@ -355,8 +355,6 @@ void Grid::next(Grid &currentGrid, bool print){
   prevBoard = currentGrid.board;
   for(int i = 0; i < currentGrid.m_width; ++i){
     for(int j = 0; j < currentGrid.m_height; ++j){
-      Cell currentCell = currentGrid.board[i][j];
-      // cout << "Cell at " << "[" << i << "]" << "[" << j << "]" << " count: " << calculateNumberOfNeighbors(i,j, currentGrid) << endl;
       int numberOfNeighbors = calculateNumberOfNeighbors(i, j, currentGrid);
       if(numberOfNeighbors <= 1){
         newGrid->setElement(i, j, '-');

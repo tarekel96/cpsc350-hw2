@@ -13,7 +13,8 @@ class Doughnut: public Grid{
     Doughnut(Grid &currentGrid);
     ~Doughnut();
     string printGrid() override;
-    int calculateNumberOfNeighbors(int row, int col, Doughnut &currentGrid);
+    int calcNeighbors(int row, int col, Doughnut &currentGrid);
+    void next(Doughnut &currentGrid, bool print);
   private:
 };
 #endif

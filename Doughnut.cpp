@@ -22,7 +22,7 @@ string Doughnut::printGrid(){
   }
   return grid;
 }
-int Doughnut::calculateNumberOfNeighbors(int row, int col, Doughnut &currentGrid){
+int Doughnut::calcNeighbors(int row, int col, Doughnut &currentGrid){
   int count = 0;
   // top left case
   if(row == 0 && col == 0){
@@ -188,28 +188,28 @@ int Doughnut::calculateNumberOfNeighbors(int row, int col, Doughnut &currentGrid
   }
   // first col - middle
   else if(col == 0 && row != 0 && row != currentGrid.getRows() - 1){
-    if(currentGrid.board[col][row - 1].getOccupied()){
+    if(currentGrid.board[row - 1][col].getOccupied()){
       count++;
     }
-    if(currentGrid.board[col][row + 1].getOccupied()){
+    if(currentGrid.board[row + 1][col].getOccupied()){
       count++;
     }
-    if(currentGrid.board[col + 1][row - 1].getOccupied()){
+    if(currentGrid.board[row - 1][col + 1].getOccupied()){
       count++;
     }
-    if(currentGrid.board[col + 1][row].getOccupied()){
+    if(currentGrid.board[row][col + 1].getOccupied()){
       count++;
     }
-    if(currentGrid.board[col + 1][row + 1].getOccupied()){
+    if(currentGrid.board[row + 1][col + 1].getOccupied()){
       count++;
     }
-    if(currentGrid.board[currentGrid.getColumns() - 1][row - 1].getOccupied()){
+    if(currentGrid.board[row - 1][currentGrid.getColumns() - 1].getOccupied()){
       count++;
     }
-    if(currentGrid.board[currentGrid.getColumns() - 1][row].getOccupied()){
+    if(currentGrid.board[row][currentGrid.getColumns() - 1].getOccupied()){
       count++;
     }
-    if(currentGrid.board[currentGrid.getColumns() - 1][row + 1].getOccupied()){
+    if(currentGrid.board[row + 1][currentGrid.getColumns() - 1].getOccupied()){
       count++;
     }
   }
@@ -268,4 +268,31 @@ int Doughnut::calculateNumberOfNeighbors(int row, int col, Doughnut &currentGrid
     }
   }
   return count;
+}
+void Doughnut::next(Doughnut &currentGrid, bool print){
+  Doughnut* newGrid = new Doughnut(currentGrid);
+  const int ROW = currentGrid.getRows();
+  const int COL = currentGrid.getColumns();
+  prevBoard = currentGrid.board;
+  for(int i = 0; i < ROW; ++i){
+    for(int j = 0; j < COL; ++j){
+      int numberOfNeighbors = calcNeighbors(i, j, currentGrid);
+      if(numberOfNeighbors <= 1){
+        newGrid->setElement(i, j, '-');
+      }
+      else if(numberOfNeighbors == 2){
+        newGrid->setElement(i,j,currentGrid.board[i][j].getValue());
+      }
+      else if(numberOfNeighbors == 3){
+        newGrid->setElement(i,j,'X');
+      }
+      else {
+        newGrid->setElement(i, j, '-');
+      }
+    }
+  }
+  board = newGrid->board;
+  incrementGeneration();
+  if(print)
+    cout << printGrid() << endl;
 }

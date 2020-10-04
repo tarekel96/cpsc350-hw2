@@ -12,6 +12,8 @@ class Mirror: public Grid{
     Mirror(Grid &currentGrid);
     ~Mirror();
     string printGrid() override;
+    int calcNeighbors(int row, int col, Mirror &currentGrid);
+    void next(Mirror &currentGrid, bool print);
   private:
 };
 #endif

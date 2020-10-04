@@ -35,7 +35,7 @@ class Grid{
     void setGeneration(int generation);
     void setPrevBoard(Grid &currentBoard);
     // helper functions
-    void next(Grid &currentGrid, bool print);
+    virtual void next(Grid &currentGrid, bool print);
     virtual int calculateNumberOfNeighbors(int row, int col, Grid &currentGrid);
     bool compareGenerations();
 };

@@ -11,6 +11,8 @@ using namespace std;
 class Game {
   private:
     Grid* m_grid;
+    Doughnut* m_gridDoughnut;
+    Mirror* m_gridMirror;
     bool m_pause;
     string m_outFile;
   public:
