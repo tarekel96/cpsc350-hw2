@@ -23,9 +23,6 @@ Grid::Grid(Grid &currentGrid){
   m_height = currentGrid.m_height;
   m_transition = currentGrid.m_transition;
   m_generation = currentGrid.m_generation;
-  // cout << "generation " << m_generation << endl;
-  // incrementGeneration();
-  // cout << "generation " << m_generation << endl;
   // dynamic allocation
   board = new Cell*[m_width];
   for(int i = 0; i < m_width; ++i){
@@ -190,9 +187,6 @@ void Grid::setPrevBoard(Grid &currentBoard){
   int height = currentBoard.m_height;
   int transition = currentBoard.m_transition;
   int generation = currentBoard.m_generation;
-  // cout << "generation " << m_generation << endl;
-  // incrementGeneration();
-  // cout << "generation " << m_generation << endl;
   // dynamic allocation
   prevBoard = new Cell*[width];
   for(int i = 0; i < width; ++i){
@@ -207,7 +201,6 @@ void Grid::setPrevBoard(Grid &currentBoard){
 }
 int Grid::calculateNumberOfNeighbors(int row, int col, Grid &currentGrid){
   int count = 0;
-  //cout << "Occupied : " << currentGrid.board[row][col].getOccupied() << endl;
   // top left case
   if(row == 0 && col == 0){
     if(currentGrid.board[row][col + 1].getOccupied()){
@@ -394,5 +387,5 @@ bool Grid::compareGenerations(){
       }
     }
   }
-  return (count > 0 ? false : true);
+  return (count == 0);
 }

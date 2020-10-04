@@ -64,8 +64,56 @@ Game::Game(){
     // DOUGHNUT MODE - RANDOM BOARD
     else if(mode == 2){
       int transition = getGenerationTransition();
+      string userFile;
+      ofstream outFile;
+      if(transition == 3){
+        cout << "Enter the name of the file where the results should be outputted: " << endl;
+        cin >> userFile;
+      }
       m_grid = new Doughnut(rows, columns, populationDensity, transition);
-      cout << m_grid->printGrid() << endl;
+      if(transition == 1 || transition == 2){
+        cout << "INITIAL GRID: \n";
+        cout << m_grid->printGrid() << endl;
+      }
+      if(transition == 3){
+        outFile.open(userFile);
+        outFile << m_grid->printGrid();
+        outFile.close();
+      }
+      Doughnut* tempGrid = new Doughnut(*m_grid);
+      if(transition == 3)
+        m_grid->next(*tempGrid, false);
+      else
+        m_grid->next(*tempGrid, true);
+      if(transition == 3){
+        outFile.open(userFile, ios::out | ios::app);
+        outFile << m_grid->printGrid();
+        outFile.close();
+      }
+      while(m_grid->compareGenerations() == false){
+        Doughnut* tempG = new Doughnut(*m_grid);
+        // CLASSICAL - RANDOM BOARD - BRIEF PAUSES
+        if(m_grid->getTransition() == 1){
+          sleep(1);
+          m_grid->next(*tempG, true);
+        }
+        // CLASSICAL - RANDOM BOARD - PRESS ENTER
+        else if(m_grid->getTransition() == 2){
+          cout << "Press Enter To Continue: " << endl;
+          cin.get();
+          m_grid->next(*tempG, true);
+        }
+        // CLASSICAL - RANDOM BOARD - WRITE TO ANOTHER FILE
+        else if(m_grid->getTransition() == 3){
+          m_grid->next(*tempG, false);
+          outFile.open(userFile, ios::out | ios::app);
+          outFile << m_grid->printGrid() << endl;
+          outFile.close();
+        }
+        else {
+
+        }
+      }
     }
     // MIRROR MODE - RANDOM BOARD
     else if(mode == 3){
@@ -142,10 +190,59 @@ Game::Game(){
           }
         }
       }
+      // DOUGHNUT - GIVEN BOARD
       else if(mode == 2){
         int transition = getGenerationTransition();
+        string userFile;
+        ofstream outFile;
+        if(transition == 3){
+          cout << "Enter the name of the file where the results should be outputted: " << endl;
+          cin >> userFile;
+        }
         m_grid = new Doughnut(file, transition);
-        cout << m_grid->printGrid() << endl;
+        if(transition == 1 || transition == 2){
+          cout << "INITIAL GRID: \n";
+          cout << m_grid->printGrid() << endl;
+        }
+        if(transition == 3){
+          outFile.open(userFile);
+          outFile << m_grid->printGrid();
+          outFile.close();
+        }
+        Doughnut* tempGrid = new Doughnut(*m_grid);
+        if(transition == 3)
+          m_grid->next(*tempGrid, false);
+        else
+          m_grid->next(*tempGrid, true);
+        if(transition == 3){
+          outFile.open(userFile, ios::out | ios::app);
+          outFile << m_grid->printGrid();
+          outFile.close();
+        }
+        while(m_grid->compareGenerations() == false){
+          Doughnut* tempG = new Doughnut(*m_grid);
+          // DOUGHNUT - RANDOM BOARD - BRIEF PAUSES
+          if(m_grid->getTransition() == 1){
+            sleep(1);
+            m_grid->next(*tempG, true);
+          }
+          // DOUGHNUT - RANDOM BOARD - PRESS ENTER
+          else if(m_grid->getTransition() == 2){
+            cout << "Press Enter To Continue: " << endl;
+            cin.get();
+            m_grid->next(*tempG, true);
+          }
+          // DOUGHNUT - RANDOM BOARD - WRITE TO ANOTHER FILE
+          else if(m_grid->getTransition() == 3){
+            m_grid->next(*tempG, false);
+            outFile.open(userFile, ios::out | ios::app);
+            outFile << m_grid->printGrid() << endl;
+            outFile.close();
+          }
+          else {
+
+          }
+        }
       }
       else if(mode == 3){
         int transition = getGenerationTransition();

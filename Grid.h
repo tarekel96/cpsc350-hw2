@@ -11,10 +11,11 @@ class Grid{
     int m_width;
     int m_height;
     int m_transition;
-    int m_generation;
+    // int m_generation;
   public:
     Cell **board;
     Cell **prevBoard;
+    int m_generation;
     Grid();
     Grid(string file, int transition);
     Grid(int width, int height, int transition);
@@ -36,7 +37,7 @@ class Grid{
     void setPrevBoard(Grid &currentBoard);
     // helper functions
     void next(Grid &currentGrid, bool print);
-    int calculateNumberOfNeighbors(int row, int col, Grid &currentGrid);
+    virtual int calculateNumberOfNeighbors(int row, int col, Grid &currentGrid);
     bool compareGenerations();
 };
 #endif // GRID_H
