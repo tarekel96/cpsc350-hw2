@@ -1,29 +1,80 @@
 #include "Game.h"
 Game::Game(){
   int response = getResponse();
+  // RANDOM ASSIGN CELL VALUES TO BOARD
   if(response == 1){
     int rows = getRow();
     int columns = getCol();
     float populationDensity = getPopulationDensity();
     int mode = getMode();
+    // CLASSICAL MODE - RANDOM BOARD
     if(mode == 1){
       int transition = getGenerationTransition();
+      string userFile;
+      ofstream outFile;
+      if(transition == 3){
+        cout << "Enter the name of the file where the results should be outputted: " << endl;
+        cin >> userFile;
+      }
       m_grid = new Grid(rows, columns, populationDensity, transition);
-      cout << m_grid->printGrid() << endl;
-      // Grid nextG = new Grid(*m_grid);
-      // cout << m_grid->printGrid() << endl;
+      if(transition == 1 || transition == 2){
+        cout << "INITIAL GRID: \n";
+        cout << m_grid->printGrid() << endl;
+      }
+      if(transition == 3){
+        outFile.open(userFile);
+        outFile << m_grid->printGrid();
+        outFile.close();
+      }
+      Grid* tempGrid = new Grid(*m_grid);
+      if(transition == 3)
+        m_grid->next(*tempGrid, false);
+      else
+        m_grid->next(*tempGrid, true);
+      if(transition == 3){
+        outFile.open(userFile, ios::out | ios::app);
+        outFile << m_grid->printGrid();
+        outFile.close();
+      }
+      while(m_grid->compareGenerations() == false){
+        Grid* tempG = new Grid(*m_grid);
+        // CLASSICAL - RANDOM BOARD - BRIEF PAUSES
+        if(m_grid->getTransition() == 1){
+          sleep(1);
+          m_grid->next(*tempG, true);
+        }
+        // CLASSICAL - RANDOM BOARD - PRESS ENTER
+        else if(m_grid->getTransition() == 2){
+          cout << "Press Enter To Continue: " << endl;
+          cin.get();
+          m_grid->next(*tempG, true);
+        }
+        // CLASSICAL - RANDOM BOARD - WRITE TO ANOTHER FILE
+        else if(m_grid->getTransition() == 3){
+          m_grid->next(*tempG, false);
+          outFile.open(userFile, ios::out | ios::app);
+          outFile << m_grid->printGrid() << endl;
+          outFile.close();
+        }
+        else {
+
+        }
+      }
     }
+    // DOUGHNUT MODE - RANDOM BOARD
     else if(mode == 2){
       int transition = getGenerationTransition();
       m_grid = new Doughnut(rows, columns, populationDensity, transition);
       cout << m_grid->printGrid() << endl;
     }
+    // MIRROR MODE - RANDOM BOARD
     else if(mode == 3){
       int transition = getGenerationTransition();
       m_grid = new Mirror(rows, columns, populationDensity, transition);
       cout << m_grid->printGrid() << endl;
     }
   }
+  // POPULATE BOARD FROM GIVEN FILE
   else if(response == 2){
       string file;
       int mode;
@@ -37,6 +88,7 @@ Game::Game(){
         delete FE;
       }
       mode = getMode();
+      // CLASSICAL MODE - GIVEN BOARD
       if(mode == 1){
         int transition = getGenerationTransition();
         string userFile;
@@ -46,15 +98,20 @@ Game::Game(){
           cin >> userFile;
         }
         m_grid = new Grid(file, transition);
-        cout << "INITIAL GRID: \n";
-        cout << m_grid->printGrid() << endl;
+        if(transition == 1 || transition == 2){
+          cout << "INITIAL GRID: \n";
+          cout << m_grid->printGrid() << endl;
+        }
         if(transition == 3){
           outFile.open(userFile);
           outFile << m_grid->printGrid();
           outFile.close();
         }
         Grid* tempGrid = new Grid(*m_grid);
-        m_grid->next(*tempGrid);
+        if(transition == 3)
+          m_grid->next(*tempGrid, false);
+        else
+          m_grid->next(*tempGrid, true);
         if(transition == 3){
           outFile.open(userFile, ios::out | ios::app);
           outFile << m_grid->printGrid();
@@ -62,17 +119,20 @@ Game::Game(){
         }
         while(m_grid->compareGenerations() == false){
           Grid* tempG = new Grid(*m_grid);
+          // CLASSICAL - GIVEN BOARD - BRIEF PAUSES
           if(m_grid->getTransition() == 1){
             sleep(1);
-            m_grid->next(*tempG);
+            m_grid->next(*tempG, true);
           }
+          // CLASSICAL - GIVEN BOARD - PRESS ENTER
           else if(m_grid->getTransition() == 2){
             cout << "Press Enter To Continue: " << endl;
             cin.get();
-            m_grid->next(*tempG);
+            m_grid->next(*tempG, true);
           }
+          // CLASSICAL - GIVEN BOARD - WRITE TO ANOTHER FILE
           else if(m_grid->getTransition() == 3){
-            m_grid->next(*tempG);
+            m_grid->next(*tempG, false);
             outFile.open(userFile, ios::out | ios::app);
             outFile << m_grid->printGrid() << endl;
             outFile.close();

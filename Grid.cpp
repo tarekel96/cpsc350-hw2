@@ -357,7 +357,7 @@ int Grid::calculateNumberOfNeighbors(int row, int col, Grid &currentGrid){
   }
   return count;
 }
-void Grid::next(Grid &currentGrid){
+void Grid::next(Grid &currentGrid, bool print){
   Grid* newGrid = new Grid(currentGrid);
   prevBoard = currentGrid.board;
   for(int i = 0; i < currentGrid.m_width; ++i){
@@ -381,7 +381,8 @@ void Grid::next(Grid &currentGrid){
   }
   board = newGrid->board;
   incrementGeneration();
-  cout << printGrid() << endl;
+  if(print)
+    cout << printGrid() << endl;
 }
 bool Grid::compareGenerations(){
   int count = 0;

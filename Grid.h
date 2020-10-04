@@ -30,12 +30,12 @@ class Grid{
     int getTransition();
     int getGenerationNumber();
     char getElement(int row, int col);
-    // mutators
+    // mutatorss
     void setElement(int row, int col, char value);
     void setGeneration(int generation);
     void setPrevBoard(Grid &currentBoard);
     // helper functions
-    void next(Grid &currentGrid);
+    void next(Grid &currentGrid, bool print);
     int calculateNumberOfNeighbors(int row, int col, Grid &currentGrid);
     bool compareGenerations();
 };
