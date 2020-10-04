@@ -39,14 +39,47 @@ Game::Game(){
       mode = getMode();
       if(mode == 1){
         int transition = getGenerationTransition();
+        string userFile;
+        ofstream outFile;
+        if(transition == 3){
+          cout << "Enter the name of the file where the results should be outputted: " << endl;
+          cin >> userFile;
+        }
         m_grid = new Grid(file, transition);
         cout << "INITIAL GRID: \n";
         cout << m_grid->printGrid() << endl;
+        if(transition == 3){
+          outFile.open(userFile);
+          outFile << m_grid->printGrid();
+          outFile.close();
+        }
         Grid* tempGrid = new Grid(*m_grid);
         m_grid->next(*tempGrid);
+        if(transition == 3){
+          outFile.open(userFile, ios::out | ios::app);
+          outFile << m_grid->printGrid();
+          outFile.close();
+        }
         while(m_grid->compareGenerations() == false){
           Grid* tempG = new Grid(*m_grid);
-          m_grid->next(*tempG);
+          if(m_grid->getTransition() == 1){
+            sleep(1);
+            m_grid->next(*tempG);
+          }
+          else if(m_grid->getTransition() == 2){
+            cout << "Press Enter To Continue: " << endl;
+            cin.get();
+            m_grid->next(*tempG);
+          }
+          else if(m_grid->getTransition() == 3){
+            m_grid->next(*tempG);
+            outFile.open(userFile, ios::out | ios::app);
+            outFile << m_grid->printGrid() << endl;
+            outFile.close();
+          }
+          else {
+
+          }
         }
       }
       else if(mode == 2){
