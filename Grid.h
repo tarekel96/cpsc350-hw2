@@ -11,11 +11,10 @@ class Grid{
     int m_width;
     int m_height;
     int m_transition;
-    // int m_generation;
+    int m_generation;
   public:
     Cell **board;
     Cell **prevBoard;
-    int m_generation;
     Grid();
     Grid(string file, int transition);
     Grid(int width, int height, int transition);
