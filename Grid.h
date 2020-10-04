@@ -10,30 +10,33 @@ class Grid{
   private:
     int m_width;
     int m_height;
-    Cell **prevArray;
-    Cell **nextArray;
+    int m_transition;
     int m_generation;
-    int m_mode;
   public:
+    Cell **board;
+    Cell **prevBoard;
     Grid();
-    Grid(string file);
-    Grid(int width, int height);
-    Grid(int width, int height, float populationDensity);
-    Grid(const Grid &currentGrid);
+    Grid(string file, int transition);
+    Grid(int width, int height, int transition);
+    Grid(int width, int height, float populationDensity, int transition);
+    Grid(Grid &currentGrid);
     ~Grid();
-    Cell **array;
     virtual string printGrid();
+    virtual string printPrevGrid();
     void incrementGeneration();
     // accessors
     int getRows();
     int getColumns();
-    char getElement(int row, int col);
+    int getTransition();
     int getGenerationNumber();
+    char getElement(int row, int col);
     // mutators
     void setElement(int row, int col, char value);
     void setGeneration(int generation);
+    void setPrevBoard(Grid &currentBoard);
     // helper functions
-    void next(Grid const& currentGrid);
-    int calculateNumberOfNeighbors(int row, int col, Grid const &currentGrid);
+    void next(Grid &currentGrid);
+    int calculateNumberOfNeighbors(int row, int col, Grid &currentGrid);
+    bool compareGenerations();
 };
 #endif // GRID_H

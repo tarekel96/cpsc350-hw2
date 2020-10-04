@@ -1,8 +1,4 @@
 #include "Game.h"
-#include "Mirror.h"
-#include "Doughnut.h"
-#include "FileError.h"
-#include <unistd.h>
 Game::Game(){
   int response = getResponse();
   if(response == 1){
@@ -11,15 +7,20 @@ Game::Game(){
     float populationDensity = getPopulationDensity();
     int mode = getMode();
     if(mode == 1){
-      m_grid = new Grid(rows, columns, populationDensity);
+      int transition = getGenerationTransition();
+      m_grid = new Grid(rows, columns, populationDensity, transition);
       cout << m_grid->printGrid() << endl;
+      // Grid nextG = new Grid(*m_grid);
+      // cout << m_grid->printGrid() << endl;
     }
     else if(mode == 2){
-      m_grid = new Doughnut(rows, columns, populationDensity);
+      int transition = getGenerationTransition();
+      m_grid = new Doughnut(rows, columns, populationDensity, transition);
       cout << m_grid->printGrid() << endl;
     }
     else if(mode == 3){
-      m_grid = new Mirror(rows, columns, populationDensity);
+      int transition = getGenerationTransition();
+      m_grid = new Mirror(rows, columns, populationDensity, transition);
       cout << m_grid->printGrid() << endl;
     }
   }
@@ -37,15 +38,25 @@ Game::Game(){
       }
       mode = getMode();
       if(mode == 1){
-        m_grid = new Grid(file);
+        int transition = getGenerationTransition();
+        m_grid = new Grid(file, transition);
+        cout << "INITIAL GRID: \n";
         cout << m_grid->printGrid() << endl;
+        Grid* tempGrid = new Grid(*m_grid);
+        m_grid->next(*tempGrid);
+        while(m_grid->compareGenerations() == false){
+          Grid* tempG = new Grid(*m_grid);
+          m_grid->next(*tempG);
+        }
       }
       else if(mode == 2){
-        m_grid = new Doughnut(file);
+        int transition = getGenerationTransition();
+        m_grid = new Doughnut(file, transition);
         cout << m_grid->printGrid() << endl;
       }
       else if(mode == 3){
-        m_grid = new Mirror(file);
+        int transition = getGenerationTransition();
+        m_grid = new Mirror(file, transition);
         cout << m_grid->printGrid() << endl;
       }
   }
@@ -58,72 +69,60 @@ Game::~Game(){
 }
 int Game::getResponse(){
   int response;
-  bool correctInput = false;
-  while (!correctInput){
+  while(true){
     cout << "Enter 1 if you like to randomly assign cell values or 2 if you would like to use a map" << endl;
     cin >> response;
-    if(response == 1 || response == 2){
-      correctInput = true;
-    }
-    else {
-      correctInput = false;
-    }
+    if(response != 1 && response != 2)
+      continue;
+    else
+      break;
   }
   return response;
 }
 int Game::getRow(){
   int rows;
-  bool correctInput = false;
-  while (!correctInput){
+  while(true){
     cout << "Enter the number of rows your grid will have: " << endl;
     cin >> rows;
-    if(rows >= 1){
-      correctInput = true;
-    }
-    else {
-      correctInput = false;
-    }
+    if(rows >= 1)
+      break;
+    else
+      continue;
   }
   return rows;
 }
 int Game::getCol(){
   int columns;
   bool correctInput = false;
-  while (!correctInput){
+  while(true){
     cout << "Enter the number of columns your grid will have: " << endl;
     cin >> columns;
-    if(columns >= 1){
-      correctInput = true;
-    }
-    else {
-      correctInput = false;
-    }
+    if(columns >= 1)
+      break;
+    else
+      continue;
   }
   return columns;
 }
 float Game::getPopulationDensity(){
   float populationDensity;
-  bool correctInput = false;
-  while (!correctInput){
+  while (true){
     cout << "Enter a decimal value (greater than 0 and less than or equal to 1) - represents the initial population density of the world: " << endl;
     cin >> populationDensity;
-    if((populationDensity >= 0.0) && (populationDensity <= 1.0)){
-      correctInput = true;
-    }
-    else {
-      correctInput = false;
-    }
+    if((populationDensity >= 0.0) && (populationDensity <= 1.0))
+      break;
+    else
+      continue;
   }
   return populationDensity;
 }
 int Game::getGenerationTransition(){
   int pause;
-  bool correctInput = false;
-  while(!correctInput){
+  while(true){
     cout << "Enter 1 to include a brief pause, 2 to press Enter in between generations, or 3 to display results in a file: " << endl;
     cin >> pause;
     if(pause == 1 || pause == 2 || pause == 3)
-      correctInput = true;
+      break;
     else
       cerr << "ERROR: Invalid Input" << endl;
       continue;
@@ -138,12 +137,11 @@ string Game::getFileName(){
 }
 int Game::getMode(){
   int mode;
-  bool correctInput = false;
-  while(!correctInput){
+  while(true){
     cout << "Enter 1 for Classic Mode, 2 for Doughnut Mode, and 3 for Mirror Mode" << endl;
     cin >> mode;
     if(mode == 1 || mode == 2 || mode == 3)
-      correctInput = true;
+      break;
     else
       cerr << "ERROR: Invalid Input" << endl;
       continue;

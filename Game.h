@@ -1,9 +1,11 @@
-// #ifndef HEADER_FILE
-// #define HEADER_FILE
+#ifndef GAME_H
+#define GAME_H
 #include <iostream>
-#include "Doughnut.h"
-// #include "Mirror.h"
 #include "Grid.h"
+#include "Doughnut.h"
+#include "Mirror.h"
+#include "FileError.h"
+#include <unistd.h>
 using namespace std;
 
 class Game {
@@ -25,4 +27,4 @@ class Game {
     string getFileName();
     int getMode();
 };
-// #endif
+#endif

@@ -1,5 +1,5 @@
-// #ifndef HEADER_FILE
-// #define HEADER_FILE
+#ifndef FILERROR_H
+#define FILERROR_H
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -18,4 +18,4 @@ class FileError{
     // mutators
     void setFile(string file);
 };
-// #endif
+#endif

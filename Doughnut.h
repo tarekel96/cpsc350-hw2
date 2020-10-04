@@ -7,10 +7,10 @@ using namespace std;
 class Doughnut: public Grid{
   public:
     Doughnut();
-    Doughnut(string file);
-    Doughnut(int width, int height);
-    Doughnut(int width, int height, float populationDensity);
-    Doughnut(const Grid &currentGrid);
+    Doughnut(string file, int transition);
+    Doughnut(int width, int height, int transition);
+    Doughnut(int width, int height, float populationDensity, int transition);
+    Doughnut(Grid &currentGrid);
     ~Doughnut();
     string printGrid() override;
   private:
