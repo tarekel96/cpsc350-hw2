@@ -1,24 +1,30 @@
+/**
+  * a class that reprents a cell in 2D array/grid
+  * @author Tarek El-Hajjaoui
+  * @version 1.0
+*/
 #ifndef CELL_H
 #define CELL_H
 #include <iostream>
 using namespace std;
-
 class Cell{
+  /* private fields */
   private:
-    char m_value;
-    bool m_occupied;
-    int m_numberOfNeighbors;
+    char m_value; // the char value of the cell
+    bool m_occupied; // true = occupied and false = vacant
+  /* public fields */
   public:
-    // default Constructor
+    /* Default Constructor */
     Cell();
-    Cell(bool occupied, int numberOfNeighbors);
-    // accessors
+    /* Overloaded Constructor */
+    Cell(bool occupied);
+    /* Destructor */
+    ~Cell();
+    /* ACCESSORS */
     bool getOccupied();
-    int getNumberOfNeighbors();
     char getValue();
-    // mutators
+    /* MUTATORS */
     void setOccupied(bool occupied);
-    void setNumberOfNeighbors(int numberOfNeighbors);
     void setValue(char val);
 };
 #endif
