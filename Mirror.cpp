@@ -25,217 +25,145 @@ int Mirror::calcNeighbors(int row, int col, Mirror &currentGrid){
   int count = 0;
   // top left case
   if(row == 0 && col == 0){
+    if(currentGrid.board[row][col].getOccupied()){
+      count += 3;
+    }
     if(currentGrid.board[row][col + 1].getOccupied()){
-      count++;
+      count += 2;
     }
     if(currentGrid.board[row + 1][col].getOccupied()){
-      count++;
+      count += 2;
     }
     if(currentGrid.board[row + 1][col + 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row][currentGrid.getColumns() - 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row + 1][currentGrid.getColumns() - 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[currentGrid.getRows() - 1][col].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[currentGrid.getRows() - 1][col + 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[currentGrid.getRows() - 1][currentGrid.getColumns() - 1].getOccupied()){
       count++;
     }
   }
   // top right case
   else if(row == 0 && col == currentGrid.getColumns() - 1){
+    if(currentGrid.board[row][col].getOccupied()){
+      count += 3;
+    }
     if(currentGrid.board[row][col - 1].getOccupied()){
-      count++;
+      count += 2;
     }
     if(currentGrid.board[row + 1][col].getOccupied()){
-      count++;
+      count += 2;
     }
     if(currentGrid.board[row + 1][col - 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row][0].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row + 1][0].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[currentGrid.getRows() - 1][0].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[currentGrid.getRows() - 1][col].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[currentGrid.getRows() - 1][col - 1].getOccupied()){
       count++;
     }
   }
   // bottom left case
   else if(row == currentGrid.getRows() - 1 && col == 0){
-    if(currentGrid.board[0][col].getOccupied()){
-      count++;
+    if(currentGrid.board[row][col].getOccupied()){
+      count += 3;
     }
     if(currentGrid.board[row - 1][col].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row - 1][col + 1].getOccupied()){
-      count++;
+      count += 2;
     }
     if(currentGrid.board[row][col + 1].getOccupied()){
-      count++;
+      count += 2;
     }
-    if(currentGrid.board[0][col + 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[0][currentGrid.getColumns() - 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row][currentGrid.getColumns() - 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row - 1][currentGrid.getColumns() - 1].getOccupied()){
+    if(currentGrid.board[row - 1][col + 1].getOccupied()){
       count++;
     }
   }
   // bottom right case
   else if(row == currentGrid.getRows() - 1 && col == currentGrid.getColumns() - 1){
-    if(currentGrid.board[0][0].getOccupied()){
-      count++;
+    if(currentGrid.board[row][col].getOccupied()){
+      count += 3;
     }
     if(currentGrid.board[row - 1][col].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row - 1][col - 1].getOccupied()){
-      count++;
+      count += 2;
     }
     if(currentGrid.board[row][col - 1].getOccupied()){
-      count++;
+      count += 2;
     }
-    if(currentGrid.board[row][0].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row - 1][0].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[0][col].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[0][col - 1].getOccupied()){
+    if(currentGrid.board[row - 1][col - 1].getOccupied()){
       count++;
     }
   }
   // first row - middle
   else if(row == 0 && col != 0 && col != currentGrid.getColumns() - 1){
-    if(currentGrid.board[row][col + 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row][col - 1].getOccupied()){
+    if(currentGrid.board[row][col].getOccupied()){
       count++;
     }
     if(currentGrid.board[row + 1][col].getOccupied()){
       count++;
     }
+    if(currentGrid.board[row][col - 1].getOccupied()){
+      count += 2;
+    }
+    if(currentGrid.board[row][col + 1].getOccupied()){
+      count += 2;
+    }
     if(currentGrid.board[row + 1][col + 1].getOccupied()){
       count++;
     }
     if(currentGrid.board[row + 1][col - 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[currentGrid.getRows() - 1][col - 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[currentGrid.getRows() - 1][col].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[currentGrid.getRows() - 1][col + 1].getOccupied()){
       count++;
     }
   }
   // last row - middle
   else if(row == currentGrid.getRows() - 1 && col != 0 && col != currentGrid.getColumns() - 1){
-    if(currentGrid.board[row][col - 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row][col + 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row - 1][col - 1].getOccupied()){
+    if(currentGrid.board[row][col].getOccupied()){
       count++;
     }
     if(currentGrid.board[row - 1][col].getOccupied()){
       count++;
     }
-    if(currentGrid.board[row - 1][col + 1].getOccupied()){
+    if(currentGrid.board[row][col - 1].getOccupied()){
+      count += 2;
+    }
+    if(currentGrid.board[row][col + 1].getOccupied()){
+      count += 2;
+    }
+    if(currentGrid.board[row - 1][col - 1].getOccupied()){
       count++;
     }
-    if(currentGrid.board[0][col - 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[0][col].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[0][col + 1].getOccupied()){
+    if(currentGrid.board[row - 1][col - 1].getOccupied()){
       count++;
     }
   }
   // first col - middle
   else if(col == 0 && row != 0 && row != currentGrid.getRows() - 1){
-    if(currentGrid.board[row - 1][col].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row + 1][col].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row - 1][col + 1].getOccupied()){
+    if(currentGrid.board[row][col].getOccupied()){
       count++;
     }
     if(currentGrid.board[row][col + 1].getOccupied()){
       count++;
     }
+    if(currentGrid.board[row - 1][col].getOccupied()){
+      count += 2;
+    }
+    if(currentGrid.board[row + 1][col].getOccupied()){
+      count += 2;
+    }
+    if(currentGrid.board[row - 1][col + 1].getOccupied()){
+      count++;
+    }
     if(currentGrid.board[row + 1][col + 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row - 1][currentGrid.getColumns() - 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row][currentGrid.getColumns() - 1].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row + 1][currentGrid.getColumns() - 1].getOccupied()){
       count++;
     }
   }
   // last col - middle
   else if(col == currentGrid.getColumns() - 1 && row != 0 && row != currentGrid.getRows() - 1){
-    if(currentGrid.board[row - 1][col - 1].getOccupied()){
+    if(currentGrid.board[row][col].getOccupied()){
       count++;
     }
     if(currentGrid.board[row][col - 1].getOccupied()){
       count++;
     }
-    if(currentGrid.board[row + 1][col - 1].getOccupied()){
-      count++;
-    }
     if(currentGrid.board[row - 1][col].getOccupied()){
-      count++;
+      count += 2;
     }
     if(currentGrid.board[row + 1][col].getOccupied()){
+      count += 2;
+    }
+    if(currentGrid.board[row - 1][col - 1].getOccupied()){
       count++;
     }
-    if(currentGrid.board[row - 1][0].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row][0].getOccupied()){
-      count++;
-    }
-    if(currentGrid.board[row + 1][0].getOccupied()){
+    if(currentGrid.board[row + 1][col - 1].getOccupied()){
       count++;
     }
   }
