@@ -296,6 +296,7 @@ Game::Game(){
           }
         }
       }
+      // MIRROR - GIVEN BOARD
       else if(mode == 3){
         int transition = getGenerationTransition();
         string userFile;
@@ -361,6 +362,12 @@ int Game::getResponse(){
   int response;
   while(true){
     cout << "Enter 1 if you like to randomly assign cell values or 2 if you would like to use a map" << endl;
+    if(cin.fail()){
+      cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;
+      cin.clear();
+      cin.ignore(10000,'\n');
+      continue;
+    }
     cin >> response;
     if(response != 1 && response != 2)
       continue;
@@ -374,6 +381,12 @@ int Game::getRow(){
   while(true){
     cout << "Enter the number of rows your grid will have: " << endl;
     cin >> rows;
+    if(cin.fail()){
+      cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;
+      cin.clear();
+      cin.ignore(10000,'\n');
+      continue;
+    }
     if(rows >= 1)
       break;
     else
@@ -387,6 +400,12 @@ int Game::getCol(){
   while(true){
     cout << "Enter the number of columns your grid will have: " << endl;
     cin >> columns;
+    if(cin.fail()){
+      cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;
+      cin.clear();
+      cin.ignore(10000,'\n');
+      continue;
+    }
     if(columns >= 1)
       break;
     else
@@ -399,6 +418,12 @@ float Game::getPopulationDensity(){
   while (true){
     cout << "Enter a decimal value (greater than 0 and less than or equal to 1) - represents the initial population density of the world: " << endl;
     cin >> populationDensity;
+    if(cin.fail()){
+      cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;
+      cin.clear();
+      cin.ignore(10000,'\n');
+      continue;
+    }
     if((populationDensity >= 0.0) && (populationDensity <= 1.0))
       break;
     else
@@ -411,6 +436,12 @@ int Game::getGenerationTransition(){
   while(true){
     cout << "Enter 1 to include a brief pause, 2 to press Enter in between generations, or 3 to display results in a file: " << endl;
     cin >> pause;
+    if(cin.fail()){
+      cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;
+      cin.clear();
+      cin.ignore(10000,'\n');
+      continue;
+    }
     if(pause == 1 || pause == 2 || pause == 3)
       break;
     else
@@ -421,8 +452,18 @@ int Game::getGenerationTransition(){
 }
 string Game::getFileName(){
   string file;
-  cout << "Enter the name of the map file?" << endl;
-  cin >> file;
+  while(true){
+    cout << "Enter the name of the map file?" << endl;
+    cin >> file;
+    if(cin.fail()){
+      cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;
+      cin.clear();
+      cin.ignore(10000,'\n');
+      continue;
+    }
+    else
+      break;
+  }
   return file;
 }
 int Game::getMode(){
@@ -430,10 +471,16 @@ int Game::getMode(){
   while(true){
     cout << "Enter 1 for Classic Mode, 2 for Doughnut Mode, and 3 for Mirror Mode" << endl;
     cin >> mode;
+    if(cin.fail()){
+      cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;
+      cin.clear();
+      cin.ignore(10000,'\n');
+      continue;
+    }
     if(mode == 1 || mode == 2 || mode == 3)
       break;
     else
-      cerr << "ERROR: Invalid Input" << endl;
+      cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;
       continue;
   }
   return mode;
