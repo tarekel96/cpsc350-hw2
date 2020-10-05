@@ -1,3 +1,8 @@
+/**
+  * a class that reprents the Game Of Life game
+  * @author Tarek El-Hajjaoui
+  * @version 1.0
+*/
 #ifndef GAME_H
 #define GAME_H
 #include <iostream>
@@ -7,20 +12,21 @@
 #include "FileError.h"
 #include <unistd.h>
 using namespace std;
-
 class Game {
+  /* private fields */
   private:
-    Grid* m_grid;
-    Doughnut* m_gridDoughnut;
-    Mirror* m_gridMirror;
-    bool m_pause;
-    string m_outFile;
+    Grid* m_grid; // the Grid/board of Cells for the game
+    Doughnut* m_gridDoughnut; // the Doughnut grid/board of Cells for the game
+    Mirror* m_gridMirror; // the Mirror Grid/board of Cells for the game
+    bool m_pause; //
+    string m_outFile; // the name file where results of the game can be outputted
+  /* public fields */
   public:
-    // default Constructor
+    /* Default Constructor */
     Game();
-    // destructor
+    /* Destructor */
     ~Game();
-    // prompt user for input
+    /* HELPER FUNCTIONS - PROMPTS USER FOR INPUTS */
     int getResponse();
     int getRow();
     int getCol();
