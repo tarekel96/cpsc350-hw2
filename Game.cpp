@@ -37,6 +37,7 @@ Game::Game(){
         outFile.close();
       }
       while(m_grid->compareGenerations() == false){
+        string input;
         Grid* tempG = new Grid(*m_grid);
         // CLASSICAL - RANDOM BOARD - BRIEF PAUSES
         if(m_grid->getTransition() == 1){
@@ -45,8 +46,8 @@ Game::Game(){
         }
         // CLASSICAL - RANDOM BOARD - PRESS ENTER
         else if(m_grid->getTransition() == 2){
-          cout << "Press Enter To Continue: " << endl;
-          cin.get();
+          bool input = false;
+          promptEnter();
           m_grid->next(*tempG, true);
         }
         // CLASSICAL - RANDOM BOARD - WRITE TO ANOTHER FILE
@@ -101,8 +102,7 @@ Game::Game(){
         }
         // DOUGHNUT - RANDOM BOARD - PRESS ENTER
         else if(m_gridDoughnut->getTransition() == 2){
-          cout << "Press Enter To Continue: " << endl;
-          cin.get();
+          promptEnter();
           m_gridDoughnut->next(*tempG, true);
         }
         // DOUGHNUT - RANDOM BOARD - WRITE TO ANOTHER FILE
@@ -157,8 +157,7 @@ Game::Game(){
         }
         // MIRROR - RANDOM BOARD - PRESS ENTER
         else if(m_gridMirror->getTransition() == 2){
-          cout << "Press Enter To Continue: " << endl;
-          cin.get();
+          promptEnter();
           m_gridMirror->next(*tempG, true);
         }
         // MIRROR - RANDOM BOARD - WRITE TO ANOTHER FILE
@@ -226,8 +225,7 @@ Game::Game(){
           }
           // CLASSICAL - GIVEN BOARD - PRESS ENTER
           else if(m_grid->getTransition() == 2){
-            cout << "Press Enter To Continue: " << endl;
-            cin.get();
+            promptEnter();
             m_grid->next(*tempG, true);
           }
           // CLASSICAL - GIVEN BOARD - WRITE TO ANOTHER FILE
@@ -280,8 +278,7 @@ Game::Game(){
           }
           // DOUGHNUT - RANDOM BOARD - PRESS ENTER
           else if(m_gridDoughnut->getTransition() == 2){
-            cout << "Press Enter To Continue: " << endl;
-            cin.get();
+            promptEnter();
             m_gridDoughnut->next(*tempG, true);
           }
           // DOUGHNUT - RANDOM BOARD - WRITE TO ANOTHER FILE
@@ -334,8 +331,7 @@ Game::Game(){
           }
           // DOUGHNUT - RANDOM BOARD - PRESS ENTER
           else if(m_gridMirror->getTransition() == 2){
-            cout << "Press Enter To Continue: " << endl;
-            cin.get();
+            promptEnter();
             m_gridMirror->next(*tempG, true);
           }
           // DOUGHNUT - RANDOM BOARD - WRITE TO ANOTHER FILE
@@ -484,4 +480,17 @@ int Game::getMode(){
       continue;
   }
   return mode;
+}
+void Game::promptEnter(){
+  while(true){
+     string in;
+     cout << "PRESS ENTER TO CONTINUE: " << endl;
+     getline(cin, in);
+     if (in.empty())
+      break;
+     else{
+       cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;
+       continue;
+     }
+   }
 }

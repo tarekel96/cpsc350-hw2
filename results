@@ -1,46 +1,30 @@
-MIRROR MODE
+DOUGHNUT MODE
 GENERATION: 0
-- - - X - - X 
-- X - - X - - 
-- - - - - X X 
-X - X - X - - 
-- - - - - X X 
-MIRROR MODE
+X - - X - 
+X - - X X 
+- - - - - 
+- - - - - 
+X - - X X 
+DOUGHNUT MODE
 GENERATION: 1
-- - X X X X X 
-- - - - X - - 
-X X - X X X X 
-- - - - X - - 
-- - - - X - - 
-MIRROR MODE
+- X X - - 
+X - - X - 
+- - - - X 
+- - - - X 
+X - - X - 
+DOUGHNUT MODE
 GENERATION: 2
-- X - - - - - 
-- X - - - - - 
-- - - - - - X 
-- - - - - - - 
-- - - - - - - 
+- - - - - 
+- - - - - 
+- - - - - 
+- - - - - 
+- - - - - 
 
-MIRROR MODE
+DOUGHNUT MODE
 GENERATION: 3
-X - - - - - - 
-- - - - - - - 
-- - - - - - X 
-- - - - - - - 
-- - - - - - - 
-
-MIRROR MODE
-GENERATION: 4
-- - - - - - - 
-- - - - - - - 
-- - - - - - X 
-- - - - - - - 
-- - - - - - - 
-
-MIRROR MODE
-GENERATION: 5
-- - - - - - - 
-- - - - - - - 
-- - - - - - X 
-- - - - - - - 
-- - - - - - - 
+- - - - - 
+- - - - - 
+- - - - - 
+- - - - - 
+- - - - - 
 

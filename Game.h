@@ -28,5 +28,6 @@ class Game {
     int getGenerationTransition();
     string getFileName();
     int getMode();
+    void promptEnter();
 };
 #endif
