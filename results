@@ -1,70 +1,277 @@
-CLASSICAL MODE
 GENERATION: 0
-- - - X - - X 
-- X - - X - - 
-- - - - - X X 
-X - X - X - - 
-- - - - - X X 
-CLASSICAL MODE
+X---X--
+---X---
+X--X-X-
+X--X---
+----X--
+X--X--X
+X-----X
 GENERATION: 1
-- - - - - - - 
-- - - - X - X 
-- X - X X X - 
-- - - - X - - 
-- - - - - X - 
-CLASSICAL MODE
+-------
+---X---
+--XX---
+---X---
+---XX--
+-----X-
+-------
 GENERATION: 2
-- - - - - X - 
-- - - - - - X 
-X X - - - - - 
-- X - - - - - 
-- - - - - X - 
+-------
+--XX---
+--XXX--
+-------
+---XX--
+----X--
+-------
 
-CLASSICAL MODE
 GENERATION: 3
-- - - - X X - 
-X - - - - - - 
-- - - - - - - 
-X - X - - - - 
-- X - - - X - 
+-------
+--X-X--
+--X-X--
+--X----
+---XX--
+---XX--
+-------
 
-CLASSICAL MODE
 GENERATION: 4
-- - - - X - - 
-X X - - - - - 
-- - - - - - - 
-- - - - - - - 
-X X X - - X - 
+-------
+-------
+-XX----
+--X-X--
+--X-X--
+---XX--
+-------
 
-CLASSICAL MODE
 GENERATION: 5
-- - - - X - - 
-X X - - - - - 
-- - - - - - - 
-- - - - - - - 
-X - X X - X - 
+-------
+-------
+-XXX---
+--X----
+--X-XX-
+---XX--
+-------
 
-CLASSICAL MODE
 GENERATION: 6
-- - - - X - - 
-X X - - - - - 
-- - - - - - - 
-- - - - - - - 
-X - - X X X - 
+-------
+--X----
+-XXX---
+----X--
+--X-XX-
+---XXX-
+-------
 
-CLASSICAL MODE
 GENERATION: 7
-- - - - X - - 
-X X - - - - - 
-- - - - - - - 
-- - - - - - - 
-X - - - X X - 
+-------
+-XXX---
+-XXX---
+-X--XX-
+-------
+---X-X-
+----X--
 
-CLASSICAL MODE
 GENERATION: 8
-- - - - X - - 
-X X - - - - - 
-- - - - - - - 
-- - - - - - - 
-X - - - X X - 
+--X----
+-X-X---
+X------
+-X-XX--
+-----X-
+----X--
+----X--
+
+GENERATION: 9
+--X----
+-XX----
+XX-XX--
+----X--
+---X-X-
+----XX-
+-------
+
+GENERATION: 10
+-XX----
+X------
+XX-XX--
+--X--X-
+---X-X-
+----XX-
+-------
+
+GENERATION: 11
+-X-----
+X--X---
+XXXXX--
+-XX--X-
+---X-XX
+----XX-
+-------
+
+GENERATION: 12
+-------
+X--XX--
+X---X--
+X----XX
+--XX--X
+----XXX
+-------
+
+GENERATION: 13
+-------
+---XX--
+XX-XX--
+-X-XXXX
+---X---
+---XXXX
+-----X-
+
+GENERATION: 14
+-------
+--XXX--
+XX-----
+XX---X-
+-------
+---X-XX
+-----XX
+
+GENERATION: 15
+---X---
+-XXX---
+X--XX--
+XX-----
+----XXX
+----XXX
+----XXX
+
+GENERATION: 16
+---X---
+-X-----
+X--XX--
+XX-X---
+----X-X
+---X---
+----X-X
+
+GENERATION: 17
+-------
+--XXX--
+X--XX--
+XXXX-X-
+--XXX--
+---XX--
+-------
+
+GENERATION: 18
+---X---
+--X-X--
+X----X-
+X----X-
+-----X-
+--X-X--
+-------
+
+GENERATION: 19
+---X---
+---XX--
+-X--XX-
+----XXX
+----XX-
+-------
+-------
+
+GENERATION: 20
+---XX--
+--XX-X-
+------X
+---X--X
+----X-X
+-------
+-------
+
+GENERATION: 21
+--XXX--
+--XX-X-
+--XXXXX
+------X
+-----X-
+-------
+-------
+
+GENERATION: 22
+--X-X--
+-X----X
+--X---X
+---X--X
+-------
+-------
+-------
+
+GENERATION: 23
+-------
+-XXX-X-
+--X--XX
+-------
+-------
+-------
+-------
+
+GENERATION: 24
+--X----
+-XXXXXX
+-XXXXXX
+-------
+-------
+-------
+-------
+
+GENERATION: 25
+-XX-XX-
+------X
+-X----X
+--XXXX-
+-------
+-------
+-------
+
+GENERATION: 26
+-----X-
+-XX---X
+--XXX-X
+--XXXX-
+---XX--
+-------
+-------
+
+GENERATION: 27
+-------
+-XX-X-X
+------X
+-------
+--X--X-
+-------
+-------
+
+GENERATION: 28
+-------
+-----X-
+-----X-
+-------
+-------
+-------
+-------
+
+GENERATION: 29
+-------
+-------
+-------
+-------
+-------
+-------
+-------
+
+GENERATION: 30
+-------
+-------
+-------
+-------
+-------
+-------
+-------
 

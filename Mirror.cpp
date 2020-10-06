@@ -10,14 +10,12 @@ Mirror::~Mirror(){}
 /* @Override - returns a string version of the current grid (board) */
 string Mirror::printGrid(){
   string grid = "";
-  grid += "MIRROR MODE\n";
   grid += "GENERATION: ";
   grid += to_string(getGenerationNumber());
   grid += "\n";
   for(int i = 0; i < getRows(); ++i){
     for(int j = 0; j < getColumns(); ++j){
       grid += board[i][j].getValue();
-      grid += " ";
     }
     grid += "\n";
   }

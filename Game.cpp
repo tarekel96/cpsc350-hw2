@@ -18,10 +18,6 @@ Game::Game(){
         cin >> userFile;
       }
       m_grid = new Grid(rows, columns, populationDensity, transition);
-      if(transition == 1 || transition == 2){
-        cout << "INITIAL GRID: \n";
-        cout << m_grid->printGrid() << endl;
-      }
       if(transition == 3){
         outFile.open(userFile);
         outFile << m_grid->printGrid();
@@ -197,7 +193,6 @@ Game::Game(){
         }
         m_grid = new Grid(file, transition);
         if(transition == 1 || transition == 2){
-          cout << "INITIAL GRID: \n";
           cout << m_grid->printGrid() << endl;
         }
         if(transition == 3){

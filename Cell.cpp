@@ -26,6 +26,10 @@ char Cell::getValue(){
   return m_value;
 }
 bool Cell::getOccupied(){
+  if(m_value == '-'){
+    m_occupied = false;
+    return false;
+  }
   return m_occupied;
 }
 /* MUTATORS */

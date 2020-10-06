@@ -10,14 +10,12 @@ Doughnut::~Doughnut(){}
 /* @Override - returns a string version of the current grid (board) */
 string Doughnut::printGrid(){
   string grid = "";
-  grid += "DOUGHNUT MODE\n";
   grid += "GENERATION: ";
   grid += to_string(getGenerationNumber());
   grid += "\n";
   for(int i = 0; i < getRows(); ++i){
     for(int j = 0; j < getColumns(); ++j){
       grid += board[i][j].getValue();
-      grid += " ";
     }
     grid += "\n";
   }
