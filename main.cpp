@@ -1,20 +1,30 @@
 #include "Game.h"
-#include "Grid.h"
-int main(int argv, char ** argc){
-  // Grid* g = new Grid("assign2-testFile2.txt", 3);
-  // cout << g->printGrid() << endl;
-  // Grid* tempGrid = new Grid(*g);
-  // g->next(*tempGrid, false);
-  // cout << g->printGrid() << endl;
-  // Grid* tempGrid2 = new Grid(*g);
-  // g->next(*tempGrid2, false);
-  // cout << g->printGrid() << endl;
+
+void promptQuit(){
+  int response;
   while(true){
-    Game* game = new Game();
-    cout << "The world has stabilized, press enter to exit the program" << endl;
-    game->promptEnter();
-    delete game;
-    break;
+    cout << "ENTER 1 TO QUIT THE PROGRAM" << endl;
+    cin >> response;
+    if(cin.fail()){
+      cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;
+      cin.clear();
+      cin.ignore(10000,'\n');
+      continue;
+    }
+    else{
+      if(response == 1)
+        break;
+      else{
+        cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;
+        continue;
+      }
+    }
   }
+}
+
+int main(int argv, char ** argc){
+  Game* game = new Game();
+  promptQuit();
+  delete game;
   return 0;
 }

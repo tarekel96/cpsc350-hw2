@@ -2,7 +2,7 @@
 /* Default Constructor */
 Grid::Grid(){
   /* init fields */
-  m_generation = 0;
+  m_generation = 1;
   m_rows = 3;
   m_columns = 3;
   m_transition = 1;
@@ -39,7 +39,8 @@ Grid::Grid(Grid &currentGrid){
 /* Overload Constructor */
 /* Builds a grid based on a file with a grid from the user */
 Grid::Grid(string file, int transition){
-  m_generation = 0;
+  // cout << "in here " << endl;
+  m_generation = 1;
   m_transition = transition;
   ifstream inFile;
   int rows;
@@ -70,6 +71,8 @@ Grid::Grid(string file, int transition){
   for(int i = 0; i < m_rows; ++i){
       board[i] = new Cell[m_columns];
   }
+  // cout << "first " << m_rows << endl;
+  // cout << "second " << m_columns << endl;
   inFile.open(file);
   string currentLine;
   getline(inFile, currentLine);
@@ -87,7 +90,7 @@ Grid::Grid(string file, int transition){
 /* Overload Constructor */
 /* Builds a grid based on user's row and column inputs */
 Grid::Grid(int width, int height, int transition){
-  m_generation = 0;
+  m_generation = 1;
   m_transition = transition;
   m_rows = width;
   m_columns = height;
@@ -107,7 +110,7 @@ Grid::Grid(int width, int height, int transition){
 /* Builds a grid based on user's row and column inputs */
 /* The Cells are filled based on the populationDensity supplied from the user */
 Grid::Grid(int width, int height, float populationDensity, int transition){
-  m_generation = 0;
+  m_generation = 1;
   m_transition = transition;
   float r; // random variable
   m_rows = width;
@@ -174,8 +177,6 @@ void Grid::incrementGeneration(){
 }
 /* calculates the number of neighbors a Cell in board has - it is based on the location of the Cell (Classical Mode) */
 int Grid::calculateNumberOfNeighbors(int row, int col, Grid &currentGrid){
-  //cout << "inside calc " << endl;
-  //cout << currentGrid.printGrid() << endl;
   int count = 0;
   /* TOP LEFT CASE */
   if(row == 0 && col == 0){
@@ -227,27 +228,19 @@ int Grid::calculateNumberOfNeighbors(int row, int col, Grid &currentGrid){
   }
   /* FIRST ROW - NON CORNER */
   else if(row == 0 && col != 0 && col != currentGrid.m_columns - 1){
-    // cout << "here " << endl;
     if(currentGrid.board[row][col + 1].getOccupied()){
-      // cout << "add 1" << endl;
       count++;
     }
     if(currentGrid.board[row][col - 1].getOccupied()){
-      // cout << "val " << currentGrid.board[row][col - 1].getValue() << endl;
-      // cout << currentGrid.printGrid() << endl;
-      // cout << "add 2" << endl;
       count++;
     }
     if(currentGrid.board[row + 1][col].getOccupied()){
-      // cout << "add 3" << endl;
       count++;
     }
     if(currentGrid.board[row + 1][col + 1].getOccupied()){
-      // cout << "add 4" << endl;
       count++;
     }
     if(currentGrid.board[row + 1][col - 1].getOccupied()){
-      // cout << "add 5" << endl;
       count++;
     }
   }
@@ -337,21 +330,11 @@ int Grid::calculateNumberOfNeighbors(int row, int col, Grid &currentGrid){
 /* creates the board for the next generation - based on the current board (board) */
 void Grid::next(Grid &currentGrid, bool print){
   Grid* newGrid = new Grid(currentGrid); // use Copy Constructor to create a copy of the current board
-  //cout << "INSIDE NEXT FUNC new grid" << endl;
-  //cout << newGrid->printGrid() << endl;
-  //cout << "INSIDE NEXT FUNC current grid" << endl;
-  //cout << currentGrid.printGrid() << endl;
   prevBoard = currentGrid.board; // assign to prevBoard field what was copied
   for(int i = 0; i < currentGrid.m_rows; ++i){
     for(int j = 0; j < currentGrid.m_columns; ++j){
       /* Calculate the number of neighbors each Cell has to determine how the next generation grid will be like */
       int numberOfNeighbors = calculateNumberOfNeighbors(i, j, currentGrid);
-      if(m_generation == 0){
-
-      }
-      else {
-        //cout << "[" << i << "][" << j << "] " << numberOfNeighbors << " value: " << currentGrid.board[i][j].getValue() << endl;
-      }
       /* <= 1 Neighbors - Cell dies/stays empty */
       if(numberOfNeighbors <= 1){
         newGrid->setElement(i, j, '-');
@@ -374,7 +357,7 @@ void Grid::next(Grid &currentGrid, bool print){
   board = newGrid->board;
   incrementGeneration(); /* update generation field */
   if(print)
-    cout << printGrid() << endl;
+    cout << printGrid();
 }
 /* compares board to prevBoard */
 bool Grid::compareGenerations(){

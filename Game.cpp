@@ -11,6 +11,7 @@ Game::Game(){
     /* CLASSICAL MODE - RANDOM BOARD */
     if(mode == 1){
       int transition = getGenerationTransition();
+      //out << "gen " << transition << endl;
       string userFile;
       ofstream outFile;
       if(transition == 3){
@@ -190,6 +191,7 @@ Game::Game(){
         if(transition == 3){
           cout << "Enter the name of the file where the results should be outputted: " << endl;
           cin >> userFile;
+        //  cout << "file " << file << endl;
         }
         m_grid = new Grid(file, transition);
         if(transition == 1 || transition == 2){
@@ -426,6 +428,7 @@ float Game::getPopulationDensity(){
   return populationDensity;
 }
 int Game::getGenerationTransition(){
+  //cout << "in here " << endl;
   int pause;
   while(true){
     cout << "Enter 1 to include a brief pause, 2 to press Enter in between generations, or 3 to display results in a file: " << endl;
@@ -442,6 +445,7 @@ int Game::getGenerationTransition(){
       cerr << "ERROR: Invalid Input" << endl;
       continue;
   }
+//  cout << "end pause " << pause << endl;
   return pause;
 }
 string Game::getFileName(){
@@ -482,7 +486,7 @@ int Game::getMode(){
 void Game::promptEnter(){
   while(true){
      string in;
-     cout << "PRESS ENTER TO CONTINUE: " << endl;
+     cout << "PRESS ENTER TO CONTINUE: ";
      getline(cin, in);
      if (in.empty())
       break;
