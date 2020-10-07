@@ -44,10 +44,12 @@ class Grid{
     void setPrevBoard(Grid &currentBoard);
     /* HELPER FUNCTIONS */
     virtual string printGrid(); // returns a string version of the current grid (board)
+    virtual string printInitGrid(); // returns the initial grid
     virtual string printPrevGrid(); // returns a string version of the previous generation grid (prevBoard)
     virtual void next(Grid &currentGrid, bool print); // creates the board for the next generation - based on the current board (board)
     virtual int calculateNumberOfNeighbors(int row, int col, Grid &currentGrid); // calculates the number of neighbors a cell has - Classical Mode
     void incrementGeneration(); // increments m_generation
     bool compareGenerations(); // compares board to prevBoard
+    bool isEmpty(); // checks if every cell in the grid is dead
 };
 #endif // GRID_H

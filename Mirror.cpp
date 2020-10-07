@@ -10,7 +10,7 @@ Mirror::~Mirror(){}
 /* @Override - returns a string version of the current grid (board) */
 string Mirror::printGrid(){
   string grid = "";
-  grid += "GENERATION: ";
+  grid += "generation ";
   grid += to_string(getGenerationNumber());
   grid += "\n";
   for(int i = 0; i < getRows(); ++i){
@@ -122,7 +122,7 @@ int Mirror::calcNeighbors(int row, int col, Mirror &currentGrid){
     if(currentGrid.board[row - 1][col - 1].getOccupied()){
       count++;
     }
-    if(currentGrid.board[row - 1][col - 1].getOccupied()){
+    if(currentGrid.board[row - 1][col + 1].getOccupied()){
       count++;
     }
   }

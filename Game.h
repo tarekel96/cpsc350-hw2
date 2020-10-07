@@ -35,5 +35,6 @@ class Game {
     string getFileName();
     int getMode();
     void promptEnter();
+    void promptQuit();
 };
 #endif

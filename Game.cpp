@@ -11,7 +11,6 @@ Game::Game(){
     /* CLASSICAL MODE - RANDOM BOARD */
     if(mode == 1){
       int transition = getGenerationTransition();
-      //out << "gen " << transition << endl;
       string userFile;
       ofstream outFile;
       if(transition == 3){
@@ -21,6 +20,7 @@ Game::Game(){
       m_grid = new Grid(rows, columns, populationDensity, transition);
       if(transition == 3){
         outFile.open(userFile);
+        outFile << m_grid->printInitGrid();
         outFile << m_grid->printGrid();
         outFile.close();
       }
@@ -34,7 +34,7 @@ Game::Game(){
         outFile << m_grid->printGrid();
         outFile.close();
       }
-      while(m_grid->compareGenerations() == false){
+      while(m_grid->compareGenerations() == false && m_grid->isEmpty() == false){
         string input;
         Grid* tempG = new Grid(*m_grid);
         /* CLASSICAL - RANDOM BOARD - BRIEF PAUSES */
@@ -52,7 +52,9 @@ Game::Game(){
         else if(m_grid->getTransition() == 3){
           m_grid->next(*tempG, false);
           outFile.open(userFile, ios::out | ios::app);
-          outFile << m_grid->printGrid() << endl;
+          if(!m_grid->isEmpty()){
+            outFile << m_grid->printGrid();
+          }
           outFile.close();
         }
         else {
@@ -72,12 +74,12 @@ Game::Game(){
       m_gridDoughnut = new Doughnut(rows, columns, populationDensity, transition);
       if(transition == 1 || transition == 2){
         cout << "INITIAL GRID: \n";
-        cout << m_gridDoughnut->printGrid() << endl;
+        cout << m_gridDoughnut->printGrid();
       }
       if(transition == 3){
         outFile.open(userFile);
+        outFile << m_gridDoughnut->printInitGrid();
         outFile << m_gridDoughnut->printGrid();
-        cout << m_gridDoughnut->printGrid() << endl;
         outFile.close();
       }
       Doughnut* tempGridDoughnut = new Doughnut(*m_gridDoughnut);
@@ -90,7 +92,7 @@ Game::Game(){
       else{
         m_gridDoughnut->next(*tempGridDoughnut, true);
       }
-      while(m_gridDoughnut->compareGenerations() == false){
+      while(m_gridDoughnut->compareGenerations() == false && m_gridDoughnut->isEmpty() == false){
         Doughnut* tempG = new Doughnut(*m_gridDoughnut);
         /* DOUGHNUT - RANDOM BOARD - BRIEF PAUSES */
         if(m_gridDoughnut->getTransition() == 1){
@@ -106,7 +108,9 @@ Game::Game(){
         else if(m_gridDoughnut->getTransition() == 3){
           m_gridDoughnut->next(*tempG, false);
           outFile.open(userFile, ios::out | ios::app);
-          outFile << m_gridDoughnut->printGrid() << endl;
+          if(!m_gridDoughnut->isEmpty()){
+            outFile << m_gridDoughnut->printGrid();
+          }
           outFile.close();
         }
         else {
@@ -126,12 +130,12 @@ Game::Game(){
       m_gridMirror = new Mirror(rows, columns, populationDensity, transition);
       if(transition == 1 || transition == 2){
         cout << "INITIAL GRID: \n";
-        cout << m_gridMirror->printGrid() << endl;
+        cout << m_gridMirror->printGrid();
       }
       if(transition == 3){
         outFile.open(userFile);
+        outFile << m_gridMirror->printInitGrid();
         outFile << m_gridMirror->printGrid();
-        cout << m_gridMirror->printGrid() << endl;
         outFile.close();
       }
       Mirror* tempGridMirror = new Mirror(*m_gridMirror);
@@ -144,7 +148,7 @@ Game::Game(){
       else{
         m_gridMirror->next(*tempGridMirror, true);
       }
-      while(m_gridMirror->compareGenerations() == false){
+      while(m_gridMirror->compareGenerations() == false && m_gridMirror->isEmpty() == false){
         Mirror* tempG = new Mirror(*m_gridMirror);
         /* MIRROR - RANDOM BOARD - BRIEF PAUSES */
         if(m_gridMirror->getTransition() == 1){
@@ -160,7 +164,9 @@ Game::Game(){
         else if(m_gridMirror->getTransition() == 3){
           m_gridMirror->next(*tempG, false);
           outFile.open(userFile, ios::out | ios::app);
-          outFile << m_gridMirror->printGrid() << endl;
+          if(!m_gridMirror->isEmpty()){
+            outFile << m_gridMirror->printGrid();
+          }
           outFile.close();
         }
         else {
@@ -195,10 +201,11 @@ Game::Game(){
         }
         m_grid = new Grid(file, transition);
         if(transition == 1 || transition == 2){
-          cout << m_grid->printGrid() << endl;
+          cout << m_grid->printGrid();
         }
         if(transition == 3){
           outFile.open(userFile);
+          outFile << m_grid->printInitGrid();
           outFile << m_grid->printGrid();
           outFile.close();
         }
@@ -212,7 +219,7 @@ Game::Game(){
           outFile << m_grid->printGrid();
           outFile.close();
         }
-        while(m_grid->compareGenerations() == false){
+        while(m_grid->compareGenerations() == false && m_grid->isEmpty() == false){
           Grid* tempG = new Grid(*m_grid);
           /* CLASSICAL - GIVEN BOARD - BRIEF PAUSES */
           if(m_grid->getTransition() == 1){
@@ -228,7 +235,9 @@ Game::Game(){
           else if(m_grid->getTransition() == 3){
             m_grid->next(*tempG, false);
             outFile.open(userFile, ios::out | ios::app);
-            outFile << m_grid->printGrid() << endl;
+            if(!m_grid->isEmpty()){
+              outFile << m_grid->printGrid();
+            }
             outFile.close();
           }
           else {
@@ -248,10 +257,11 @@ Game::Game(){
         m_gridDoughnut = new Doughnut(file, transition);
         if(transition == 1 || transition == 2){
           cout << "INITIAL GRID: \n";
-          cout << m_gridDoughnut->printGrid() << endl;
+          cout << m_gridDoughnut->printGrid();
         }
         if(transition == 3){
           outFile.open(userFile);
+          outFile << m_gridDoughnut->printInitGrid();
           outFile << m_gridDoughnut->printGrid();
           outFile.close();
         }
@@ -265,7 +275,7 @@ Game::Game(){
         else{
           m_gridDoughnut->next(*tempGrid, true);
         }
-        while(m_gridDoughnut->compareGenerations() == false){
+        while(m_gridDoughnut->compareGenerations() == false && m_gridDoughnut->isEmpty() == false){
           Doughnut* tempG = new Doughnut(*m_gridDoughnut);
           /* DOUGHNUT - RANDOM BOARD - BRIEF PAUSES */
           if(m_gridDoughnut->getTransition() == 1){
@@ -281,7 +291,9 @@ Game::Game(){
           else if(m_gridDoughnut->getTransition() == 3){
             m_gridDoughnut->next(*tempG, false);
             outFile.open(userFile, ios::out | ios::app);
-            outFile << m_gridDoughnut->printGrid() << endl;
+            if(!m_gridDoughnut->isEmpty()){
+              outFile << m_gridDoughnut->printGrid();
+            }
             outFile.close();
           }
           else {
@@ -301,10 +313,11 @@ Game::Game(){
         m_gridMirror = new Mirror(file, transition);
         if(transition == 1 || transition == 2){
           cout << "INITIAL GRID: \n";
-          cout << m_gridMirror->printGrid() << endl;
+          cout << m_gridMirror->printGrid();
         }
         if(transition == 3){
           outFile.open(userFile);
+          outFile << m_gridMirror->printInitGrid();
           outFile << m_gridMirror->printGrid();
           outFile.close();
         }
@@ -318,7 +331,7 @@ Game::Game(){
         else{
           m_gridMirror->next(*tempGridMirror, true);
         }
-        while(m_gridMirror->compareGenerations() == false){
+        while(m_gridMirror->compareGenerations() == false && m_gridMirror->isEmpty() == false){
           Mirror* tempG = new Mirror(*m_gridMirror);
           /* DOUGHNUT - RANDOM BOARD - BRIEF PAUSES */
           if(m_gridMirror->getTransition() == 1){
@@ -334,7 +347,9 @@ Game::Game(){
           else if(m_gridMirror->getTransition() == 3){
             m_gridMirror->next(*tempG, false);
             outFile.open(userFile, ios::out | ios::app);
-            outFile << m_gridMirror->printGrid() << endl;
+            if(!m_gridMirror->isEmpty()){
+              outFile << m_gridMirror->printGrid();
+            }
             outFile.close();
           }
           else {
@@ -495,4 +510,25 @@ void Game::promptEnter(){
        continue;
      }
    }
+}
+void Game::promptQuit(){
+  int response;
+  while(true){
+    cout << "ENTER 1 TO QUIT THE PROGRAM" << endl;
+    cin >> response;
+    if(cin.fail()){
+      cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;
+      cin.clear();
+      cin.ignore(10000,'\n');
+      continue;
+    }
+    else{
+      if(response == 1)
+        break;
+      else{
+        cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;
+        continue;
+      }
+    }
+  }
 }

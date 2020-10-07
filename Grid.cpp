@@ -140,10 +140,24 @@ Grid::~Grid(){
   delete prevBoard;
 }
 /* HELPER FUNCTIONS */
+/* returns a string version of the initial grid (board) */
+string Grid::printInitGrid(){
+  string grid = "";
+  grid += "0";
+  grid += "\n";
+  for(int i = 0; i < m_rows; ++i){
+    for(int j = 0; j < m_columns; ++j){
+      grid += board[i][j].getValue();
+    }
+    grid += "\n";
+  }
+  return grid;
+}
+/* HELPER FUNCTIONS */
 /* returns a string version of the current grid (board) */
 string Grid::printGrid(){
   string grid = "";
-  grid += "GENERATION: ";
+  grid += "generation ";
   grid += to_string(getGenerationNumber());
   grid += "\n";
   for(int i = 0; i < m_rows; ++i){
@@ -358,6 +372,19 @@ void Grid::next(Grid &currentGrid, bool print){
   incrementGeneration(); /* update generation field */
   if(print)
     cout << printGrid();
+}
+bool Grid::isEmpty(){
+  int count = 0;
+  for(int i = 0; i < getRows(); ++i){
+    for(int j = 0; j < getColumns(); ++j){
+      /* if 1 Cell differs between the board and prevBoard - the Cells are not yet stable*/
+      if(board[i][j].getOccupied()){
+        count += 1;
+        break;
+      }
+    }
+  }
+  return (count == 0);
 }
 /* compares board to prevBoard */
 bool Grid::compareGenerations(){

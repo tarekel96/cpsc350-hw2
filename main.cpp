@@ -24,7 +24,7 @@ void promptQuit(){
 
 int main(int argv, char ** argc){
   Game* game = new Game();
-  promptQuit();
+  game->promptQuit();
   delete game;
   return 0;
 }
