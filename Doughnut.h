@@ -24,7 +24,7 @@ class Doughnut: public Grid{
     ~Doughnut();
     /* HELPER FUNCTIONS */
     string printGrid() override; // returns a string version of the current grid (board)
-    int calcNeighbors(int row, int col, Doughnut &currentGrid); // calculates the number of neighbors a cell has - Doughnut Mode
+    int calculateNumberOfNeighbors(int row, int col, Doughnut &currentGrid); // calculates the number of neighbors a cell has - Doughnut Mode
     void next(Doughnut &currentGrid, bool print); // creates the board for the next generation - based on the current board (board)
   private:
 };

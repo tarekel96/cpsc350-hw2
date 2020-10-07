@@ -23,7 +23,7 @@ class Mirror: public Grid{
     ~Mirror();
     /* HELPER FUNCTIONS */
     string printGrid() override;
-    int calcNeighbors(int row, int col, Mirror &currentGrid);
+    int calculateNumberOfNeighbors(int row, int col, Mirror &currentGrid);
     void next(Mirror &currentGrid, bool print);
   private:
 };
