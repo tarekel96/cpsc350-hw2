@@ -71,8 +71,6 @@ Grid::Grid(string file, int transition){
   for(int i = 0; i < m_rows; ++i){
       board[i] = new Cell[m_columns];
   }
-  // cout << "first " << m_rows << endl;
-  // cout << "second " << m_columns << endl;
   inFile.open(file);
   string currentLine;
   getline(inFile, currentLine);
