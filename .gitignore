@@ -1,5 +1,6 @@
 *.out
 *.txt
+*.exe
 results
 results2
 results3
