@@ -19,6 +19,9 @@ Grid::Grid(){
   }
 }
 /* Copy Constructor */
+/*
+  * @param &currentGrid - repesents an instance of the Grid
+*/
 Grid::Grid(Grid &currentGrid){
   m_rows = currentGrid.m_rows;
   m_columns = currentGrid.m_columns;
@@ -38,6 +41,10 @@ Grid::Grid(Grid &currentGrid){
 }
 /* Overload Constructor */
 /* Builds a grid based on a file with a grid from the user */
+/*
+  * @param file - the name of the map file where the grid is
+  * @param transition - the user's preference for handling transitions between generations
+*/
 Grid::Grid(string file, int transition){
   // cout << "in here " << endl;
   m_generation = 1;
@@ -87,6 +94,11 @@ Grid::Grid(string file, int transition){
 }
 /* Overload Constructor */
 /* Builds a grid based on user's row and column inputs */
+/*
+  * @param width - the width of the grid
+  * @param height - the height of the grid
+  * @param transition - the user's preference for handling transitions between generations
+*/
 Grid::Grid(int width, int height, int transition){
   m_generation = 1;
   m_transition = transition;
@@ -107,6 +119,12 @@ Grid::Grid(int width, int height, int transition){
 /* Overload Constructor */
 /* Builds a grid based on user's row and column inputs */
 /* The Cells are filled based on the populationDensity supplied from the user */
+/*
+  * @param width - the width of the grid
+  * @param height - the height of the grid
+  * @param populationDensity - the populationDensity of the grid
+  * @param transition - the user's preference for handling transitions between generations
+*/
 Grid::Grid(int width, int height, float populationDensity, int transition){
   m_generation = 1;
   m_transition = transition;
@@ -188,6 +206,11 @@ void Grid::incrementGeneration(){
   m_generation++;
 }
 /* calculates the number of neighbors a Cell in board has - it is based on the location of the Cell (Classical Mode) */
+/*
+  * @param row - the number of rows of the grid
+  * @param col - the number of cols of the grid
+  * @param &currentGrid - repesents an instance of the Grid
+*/
 int Grid::calculateNumberOfNeighbors(int row, int col, Grid &currentGrid){
   int count = 0;
   /* TOP LEFT CASE */
@@ -260,6 +283,10 @@ int Grid::calculateNumberOfNeighbors(int row, int col, Grid &currentGrid){
   return count;
 }
 /* creates the board for the next generation - based on the current board (board) */
+/*
+  * @param &currentGrid - repesents an instance of the Grid
+  * @param print - a boolean value that if true will print out the grid to the console after creating a new generation
+*/
 void Grid::next(Grid &currentGrid, bool print){
   Grid* newGrid = new Grid(currentGrid); // use Copy Constructor to create a copy of the current board
   prevBoard = currentGrid.board; // assign to prevBoard field what was copied
@@ -332,15 +359,30 @@ int Grid::getTransition(){
   return m_transition;
 }
 /* MUTATORS */
+/*
+  * @param generation - the generation that will be set for the Grid class/instance
+*/
 void Grid::setGeneration(int generation){
   m_generation = generation;
 }
+/*
+  * @param row - the row of the element
+  * @param col - the col of the element
+  * @param value - the value that will be set for that element
+*/
 void Grid::setElement(int row, int col, char value){
   board[row][col].setValue(value);
 }
+/*
+  * @param row - the row of the element
+  * @param col - the col of the element
+*/
 char Grid::getElement(int row, int col){
   return board[row][col].getValue();
 }
+/*
+  * @param &currentGrid - repesents an instance of the Grid
+*/
 /* sets the prevBoard field - very similar to the Copy Constructor */
 void Grid::setPrevBoard(Grid &currentBoard){
   int width = currentBoard.m_rows;

@@ -22,6 +22,11 @@ string Doughnut::printGrid(){
   return grid;
 }
 /* calculates the number of neighbors a Cell in board has - it is based on the location of the Cell (Doughnut Mode) */
+/*
+  * @param row - the number of rows of the grid
+  * @param col - the number of cols of the grid
+  * @param &currentGrid - repesents an instance of the Doughnut
+*/
 int Doughnut::calculateNumberOfNeighbors(int row, int col, Doughnut &currentGrid){
   int count = 0;
   /* TOP LEFT CASE */
@@ -126,6 +131,10 @@ int Doughnut::calculateNumberOfNeighbors(int row, int col, Doughnut &currentGrid
   return count;
 }
 /* creates the board for the next generation - based on the current board (board) */
+/*
+  * @param &currentGrid - repesents an instance of the Doughnut
+  * @param print - a boolean value that if true will print out the grid to the console after creating a new generation
+*/
 void Doughnut::next(Doughnut &currentGrid, bool print){
   Doughnut* newGrid = new Doughnut(currentGrid);
   const int ROW = currentGrid.getRows();

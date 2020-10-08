@@ -22,6 +22,11 @@ string Mirror::printGrid(){
   return grid;
 }
 /* calculates the number of neighbors a Cell in board has - it is based on the location of the Cell (Mirror Mode) */
+/*
+  * @param row - the number of rows of the grid
+  * @param col - the number of cols of the grid
+  * @param &currentGrid - repesents an instance of the Mirror
+*/
 int Mirror::calculateNumberOfNeighbors(int row, int col, Mirror &currentGrid){
   int count = 0;
   /* TOP LEFT CASE */
@@ -102,6 +107,10 @@ int Mirror::calculateNumberOfNeighbors(int row, int col, Mirror &currentGrid){
   return count;
 }
 /* creates the board for the next generation - based on the current board (board) */
+/*
+  * @param &currentGrid - repesents an instance of the Mirror
+  * @param print - a boolean value that if true will print out the grid to the console after creating a new generation
+*/
 void Mirror::next(Mirror &currentGrid, bool print){
   Mirror* newGrid = new Mirror(currentGrid);
   const int ROW = currentGrid.getRows();

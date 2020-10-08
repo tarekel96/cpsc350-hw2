@@ -4,6 +4,9 @@ FileError::FileError(){
 }
 /* Overload Constructor */
 /* sets the m_file to the parameter */
+/*
+  * @param file - the name of the file to check
+*/
 FileError::FileError(string file){
   setFile(file);
 }
@@ -11,6 +14,9 @@ FileError::FileError(string file){
 FileError::~FileError(){
 }
 /* MUTATOR */
+/*
+  * @param file - the name of the file
+*/
 void FileError::setFile(string file){
   m_file = file;
 }
