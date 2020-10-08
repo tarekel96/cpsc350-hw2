@@ -436,8 +436,10 @@ float Game::getPopulationDensity(){
     }
     if((populationDensity >= 0.0) && (populationDensity <= 1.0))
       break;
-    else
+    else{
+      cerr << "ERROR: INVALID INPUT - PLEASE FOLLOW DIRECTIONS" << endl;  
       continue;
+    }
   }
   return populationDensity;
 }
